@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>JS-test 3</title>
+  </head>
+  <body>
+    <script>
+      // 1. Write a function which count the number of occurrence of a word in a paragraph or a sentence.The function countWords takes a paragraph and word as parameters.
+      const paragraph =
+        "I love teaching. If you do not love teaching what else can you love. I love JavaScript if you do not love something which can give life to your application what else can you love.";
+      const countWords = (para, word) => {
+        let parag = para.slice();
+        let regex = new RegExp(word, "gi");
+        let matches = parag.match(regex) || [];
+        return matches.length;
+      };
+      console.log(countWords(paragraph, "love"));
+
+      // 2.
+      // Write a function which takes an array parameter and returns an array of the data types of each item:
+      const checkDatatTypes = arr => {
+        const types = [];
+        for (let i = 0; i < arr.length; i++) {
+          let type = typeof arr[i];
+          types.push(type);
+        }
+        return types;
+      };
+      const arr = ["Asabeneh", 100, true, null, undefined, { job: "teaching" }];
+      console.log(checkDatatTypes(arr));
+      ["string", "number", "boolean", "object", "undefined", "object"];
+      const mixedData = ["John", 25, "David", 30, "Sara", 22];
+      console.log(checkDatatTypes(mixedData));
+      ["string", "number", "string", "number", "string", "number"];
+
+      // 3.
+      // Create a function which filter ages greater than 18.
+      const agesGreaterEighteen = arr => {
+        const greaterThanEighteen = [];
+        for (let age of arr) {
+          if (age > 18) {
+            greaterThanEighteen.push(age);
+          }
+        }
+        return greaterThanEighteen;
+      };
+      const ages = [35, 30, 17, 18, 15, 22, 16, 20];
+      console.log(agesGreaterEighteen(ages));
+      [35, 30, 22, , 20];
+
+      // 4. Write a function which calculate the average age of the group.
+      const averageAge = arr => {
+        let sum = 0;
+        for (let age of arr) {
+          sum += age;
+        }
+        return Math.round(sum / arr.length);
+      };
+      console.log(averageAge(ages));
+
+      // 5. Write a function which remove an item or items from the middle of the array and replace with two items
+      const middleItems = arr => {
+        if (arr.length % 2 === 0) {
+          var result = arr.slice(arr.length / 2 - 1, arr.length / 2 + 1);
+        } else {
+          var result = arr.slice().splice(Math.floor(arr.length / 2), 1);
+        }
+        return result;
+      };
+      const array = ["dog", "cat", "mouse"];
+      console.log(middleItems(array));
+
+      // 6. Write a function which can generate a random Finnish car code.
+      const genCarPlateNum = () => {
+        let threeLetters = [];
+        let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZO";
+        let numbers = "0123456789";
+        let threeNumbers = [];
+
+        for (let i = 0; i < 3; i++) {
+          threeLetters.push(
+            letters[Math.floor(Math.random() * letters.length)]
+          );
+        }
+
+        for (let i = 0; i < 3; i++) {
+          threeNumbers.push(
+            numbers[Math.floor(Math.random() * numbers.length)]
+          );
+        }
+        return `${threeLetters.join("")}-${threeNumbers.join("")}`;
+      };
+      console.log(genCarPlateNum());
+
+      console.log(genCarPlateNum());
+
+      // 7. Write a function which can generate a random Finnish social security number.
+      const genSocialSecurityNum = () => {
+        let day = Math.floor(Math.random() * 31) + 1;
+        let month = Math.floor(Math.random() * 12) + 1;
+        let year = Math.floor(Math.random() * 99) + 1;
+        let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZO";
+        let number = [];
+        let letter = "";
+
+        for (let i = 0; i < 3; i++) {
+          number.push(Math.floor(Math.random() * 9));
+        }
+
+        letter = letters[Math.floor(Math.random() * letters.length)];
+        if (day < 10) {
+          day = "0" + day;
+        }
+        if (month < 10) {
+          month = "0" + month;
+        }
+        if (year < 10) {
+          year = "0" + year;
+        }
+        return day + month + year + "-" + number.join("") + letter;
+      };
+      console.log(genSocialSecurityNum());
+      //220590-255H
+      console.log(genSocialSecurityNum());
+      //190395-225J
+
+      // 8. The following shopping cart has four products. Create an addProduct, removeProduct ,editProduct , removeAll functions to modify the shopping cart.
+      const shoppingCart = ["Milk", "Coffee", "Tea", "Honey"];
+      const removeProduct = index => {
+        shoppingCart.splice(index, 1);
+        return shoppingCart;
+      };
+
+      const editProduct = (index, product) => {
+        shoppingCart.splice(index, 1, product);
+        return shoppingCart;
+      };
+
+      const addProduct = product => {
+        shoppingCart.push(product);
+        return shoppingCart;
+      };
+      const removeAll = () => {
+        let number = shoppingCart.length;
+        shoppingCart.splice(0);
+        return shoppingCart;
+      };
+      // addProduct("Meat");
+      // removeAll();
+      // editProduct(1, "Sugar");
+      // removeProduct(0);
+      console.log(shoppingCart);
+
+      // 9. The following todoList has three tasks. Create an addTask, removeTask, editTask, toggleTask, toggleAll, removeAll functions to modify the todoList.
+      const todoList = [
+        {
+          task: "Prepare JS Test",
+          time: "4/3/2019 8:30",
+          completed: true
+        },
+        {
+          task: "Give JS Test",
+          time: "4/3/2019 10:00",
+          completed: false
+        },
+        {
+          task: "Assess Test Result",
+          time: "4/3/2019 1:00",
+          completed: false
+        }
+      ];
+
+      const addTask = description => {
+        const displayDateTime = () => {
+          const now = new Date();
+          const year = now.getFullYear();
+          const month = now.getMonth() + 1;
+          const date = now.getDate();
+          const hours = now.getHours();
+          let minutes = now.getMinutes();
+          if (minutes < 10) {
+            minutes = "0" + minutes;
+          }
+          return `${date}/${month}/${year} ${hours}:${minutes}`;
+        };
+        return todoList.push({
+          task: description,
+          time: time,
+          completed: false
+        });
+      };
+      // addTask("read");
+
+      const removeTask = description => {
+        for (let todo of todoList) {
+          if (todo.task === description) {
+            let index = todoList.indexOf(todo);
+            todoList.splice(index, 1);
+          }
+        }
+      };
+      // removeTask("Assess Test Result");
+
+      const editTask = (index, task) => {
+        todoList[index].task = task;
+      };
+
+      const toggleTask = index => {
+        todoList[index].completed = !todoList[index].completed;
+      };
+      // toggleTask(1);
+
+      const toggleAll = () => {
+        for (let todo of todoList) {
+          todo.completed = !todo.completed;
+        }
+      };
+      toggleAll();
+
+      const removeAllTodos = () => {
+        todoList.splice(0);
+      };
+      removeAllTodos();
+      console.log(todoList);
+
+      // 10. Write a function which check if items of an array are unique?
+      const arrOne = [1, 4, 6, 2, 1];
+      const checkUniqueness = arr => {
+        let checkArr = [];
+        for (let num of arr) {
+          if (checkArr.indexOf(num) === -1) {
+            checkArr.push(num);
+          }
+        }
+        if (checkArr.length === arr.length) {
+          return true;
+        } else {
+          return false;
+        }
+      };
+      console.log(checkUniqueness(arrOne));
+      //false
+      const arrTwo = [1, 4, 6, 2, 3];
+      console.log(checkUniqueness(arrTwo));
+      //true
+
+      // 11. Write a function named shuffle, it takes an array parameter and it returns a shuffled array.
+      const shuffle = arr => {
+        const newArr = [];
+        let randomIndex;
+        let item;
+        while (newArr.length !== arr.length) {
+          randomIndex = Math.floor(Math.random() * arr.length);
+          item = arr[randomIndex];
+          if (newArr.indexOf(item) === -1) {
+            newArr.push(item);
+          }
+        }
+        return newArr;
+      };
+      console.log(shuffle([1, 2, 3, 4, 5]));
+      console.log(shuffle([1, 2, 3, 4, 5]));
+
+      // BONUS
+      // Write a function which filter users who has scoresGreaterThan85, Write a
+      // function which addUser to the user array only if the user does not exist.
+      // Write a function which addUserSkill which can add skill to a user only if
+      // user exist. Write a function which editUser if the user exist in the users
+      // array.
+      const users = [
+        {
+          name: "Brook",
+          scores: 75,
+          skills: ["HTM", "CSS", "JS"],
+          age: 16
+        },
+        {
+          name: "Alex",
+          scores: 80,
+          skills: ["HTM", "CSS", "JS"],
+          age: 18
+        },
+        {
+          name: "David",
+          scores: 75,
+          skills: ["HTM", "CSS"],
+          age: 22
+        },
+        {
+          name: "John",
+          scores: 85,
+          skills: ["HTM"],
+          age: 25
+        },
+        {
+          name: "Sara",
+          scores: 95,
+          skills: ["HTM", "CSS", "JS"],
+          age: 26
+        },
+        {
+          name: "Martha",
+          scores: 80,
+          skills: ["HTM", "CSS", "JS"],
+          age: 18
+        },
+        {
+          name: "Thomas",
+          scores: 90,
+          skills: ["HTM", "CSS", "JS"],
+          age: 20
+        }
+      ];
+      const scoresGreaterThan85 = () => {
+        return users.slice().filter(user => user.scores > 85);
+      };
+      console.log(scoresGreaterThan85());
+
+      const user = {
+        name: "Maria",
+        scores: 80,
+        skills: ["HTML", "CSS", "JS"],
+        age: 25
+      };
+
+      const addUser = (arr, user) => {
+        for (let i = 0; i < arr.length; i++) {
+          if (arr[i]["name"] === user.name) {
+            return " A user does exist";
+          }
+        }
+        arr.push(user);
+        return arr;
+      };
+
+      const addUserSkill = (arr, name, skill) => {
+        for (let i = 0; i < arr.length; i++) {
+          if (arr[i]["name"] === name) {
+            arr[i].skills.push(skill);
+            break;
+          } else {
+            return "User does not exist";
+          }
+        }
+      };
+
+      console.log(addUserSkill(users, "Alex", "m"));
+
+      const editUser = (arr, name, newUser) => {
+        for (const user of arr) {
+          if (user["name"] === name) {
+            user.name = newUser.name;
+            user.scores = newUser.scores;
+            user.skills = newUser.skills;
+            user.age = newUser.age;
+          } else {
+            return "A user does not exist";
+          }
+        }
+      };
+      console.log(
+        editUser(users, "Sara", {
+          name: "Saara",
+          scores: 96,
+          skills: ["HTML", "JS"],
+          age: 23
+        })
+      );
+    </script>
+  </body>
+</html>
