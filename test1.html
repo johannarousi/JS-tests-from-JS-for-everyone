@@ -4,35 +4,40 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>JS-Test 2</title>
+    <title>JS-Test 1</title>
   </head>
   <body>
     <script>
-      // 1. Looping a triangle Write a loop that makes seven calls to console.log to output the following triangle:
-      let cross = "";
+      // 1. Looping a triangle Write a loop that makes seven calls to console.log to output the
+      // following triangle:
+      let hastag = "";
       for (let i = 0; i < 7; i++) {
-        cross += "#";
-        console.log(cross);
+        hastag += "#";
+        console.log(hastag);
       }
 
-      // 2. FizzBuzz Write a program that uses console.log to print all the numbers from 1 to 100, with two exceptions.
-      // For numbers divisible by 3, print "Fizz" instead of the number, and for numbers divisible by 5 (and not 3), print
-      // "Buzz" instead. When you have that working, modify your program to print "FizzBuzz" for numbers that are divisible
-      // by both 3 and 5 (and still print "Fizz" or "Buzz"for numbers divisible by only one of those).
+      // 2. FizzBuzz Write a program that uses console.log to print all the numbers from 1 to 100,
+      // with two exceptions. For numbers divisible by 3, print "Fizz" instead of the number, and
+      // for numbers divisible by 5 (and not 3), print "Buzz" instead. When you have that working,
+      // modify your program to print "FizzBuzz" for numbers that are divisible by both 3 and 5
+      // (and still print "Fizz" or "Buzz"for numbers divisible by only one of those).
       for (let i = 1; i < 101; i++) {
         if (i % 3 === 0 && i % 5 === 0) {
           console.log("FizzBuzz");
-        } else if (i % 3 === 0) {
+        }
+        if (i % 3 === 0) {
           console.log("Fizz");
-        } else if (i % 5 === 0) {
+        }
+        if (i % 5 === 0) {
           console.log("Buzz");
         } else {
           console.log(i);
         }
       }
 
-      // 3. Maximum Math.max returns its largest argument. We can build something like that now. Write a function findMax that takes
-      // three arguments and returns their maxiumum. Without method Math.max method.
+      // 3. Maximum Math.max returns its largest argument. We can build something like that now.
+      // Write a function findMax that takes three arguments and returns their maxiumum.
+      // Without method Math.max method.
       function findMax(a, b, c) {
         if (a > b && a > c) {
           return a;
@@ -44,20 +49,19 @@
       }
       console.log(findMax(0, 10, 5));
 
-      // 4. Reversing an array Arrays have a reverse method which changes the array by inverting the order in which its elements appear.
-      // For this exercise, write a function, reverseArray. The reverseArray, takes an array as argument and produces a new array that
-      // has the same elements in the inverse order. Without reverse method.
+      // 4. Reversing an array Arrays have a reverse method which changes the array by inverting
+      // the order in which its elements appear. For this exercise, write a function, reverseArray.
+      // The reverseArray, takes an array as argument and produces a new array that has the same
+      // elements in the inverse order. Without reverse method.
       function reverseArray(arr) {
-        let reversedArr = [];
-        let newarr = [...arr];
-        for (let i = 0; i < arr.length; i++) {
-          let pop = newarr.pop();
-          reversedArr.push(pop);
+        let reversed = [];
+        let splitted = arr.slice();
+        for (let item of arr) {
+          reversed.unshift(item);
         }
-        return reversedArr;
+        return reversed;
       }
-      let lett = ["c", "b", "a"];
-      console.log(reverseArray(lett));
+      console.log(reverseArray([1, 2, 3, 4]));
 
       // 5. Modifying an array Write a function called modifyArray takes array as parameter and modifies the fifth item of the array and returns
       // the array. If the array length is less than five it return ‘item not found’.
@@ -88,33 +92,31 @@
         return array;
       }
       console.log(sevenRandomNumbers());
-
       // 7. Write a funch which takes any number of arguments and return the sum of the arguments
       function sum() {
-        let sum = 0;
+        count = 0;
         for (let i = 0; i < arguments.length; i++) {
-          sum += arguments[i];
+          count = count + arguments[i];
         }
-        return sum;
+        return count;
       }
-      console.log(sum(1, 4, 7));
+      console.log(sum(1, 3, 5));
 
       // 8. Write a function which removes items from the middle of an array and replace with three items.
-      const middleItems = arr => {
+      function removeMiddleItems(arr, a, b, c) {
+        let copy = arr.slice();
         if (arr.length % 2 === 0) {
-          var result = arr.slice(arr.length / 2 - 1, arr.length / 2 + 1);
+          var result = copy.splice(arr.length / 2 - 1, 2, a, b, c);
         } else {
-          var result = arr.slice().splice(Math.floor(arr.length / 2), 1);
+          var result = copy.splice(Math.floor(arr.length / 2), 1, a, b, c);
         }
-        return result;
-      };
-      //const array = ["dog", "cat", "mouse"];
-      const array = ["dog", "cat", "mouse", "horse"];
-      console.log(middleItems(array));
+        return copy;
+      }
+      console.log(removeMiddleItems([1, 2, 3], 100, 200, 300));
+      console.log(removeMiddleItems([1, 2, 3, 4], 100, 200, 300));
 
-      // 9. Calculate the total annual income of the person by extracting the following text. 'He earns 5000
-      // euro from salary per month, 10000 euro annual bonus, 15000 euro online courses per month.'
-
+      // 9. Calculate the total annual income of the person by extracting the following text. 'He earns
+      // 5000 euro from salary per month, 10000 euro annual bonus, 15000 euro online courses per month.'
       const para =
         "He earns 5000 euro from salary per month, 10000 euro annual bonus, 15000 euro online courses per month.";
       const splitted = para.split(" ");
@@ -133,37 +135,13 @@
       console.log(annualIncome);
 
       // 10. Create a function that takes two strings and returns true if the first argument ends with
-      // the second argument; otherewise return false . Take two strings as arguments. Determine if second
+      // second argument; otherewise return false . Take two strings as arguments. Determine if second
       // string matches ending of first string. Return boolean value.
       function isEndingTrue(strOne, strTwo) {
         let num = strTwo.length;
         return strOne.slice(-num) === strTwo;
       }
       console.log(isEndingTrue("integrity", "ity"));
-
-      // Make a function that finds prime numbers from a range. A prime number (or a prime) is a natural number
-      // greater than 1 that has no positive divisors other than 1 and itself.
-      console.log("13.5.");
-      function findPrimeNumbers(a, b) {
-        let arr = [];
-        function isPrime(value) {
-          for (var i = 2; i < value; i++) {
-            if (value % i === 0) {
-              return false;
-            }
-          }
-          return value > 1;
-        }
-        for (let i = a; i <= b; i++) {
-          if (isPrime(i)) {
-            console.log(i);
-            arr.push(i);
-          }
-        }
-        return arr;
-      }
-      console.log(findPrimeNumbers(7, 25));
-      console.log("moi");
     </script>
   </body>
 </html>
