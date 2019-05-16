@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Hints for test4</title>
+  </head>
+  <body>
+    <script>
+      // 1. Learn different string methods:split(), trim(), startsWith(), etc
+      // 2. How to solve equation: linear or quadratic
+      // a) Linear equation is calculated as follows: ax + b = c. Write a function which
+      // calculates value of a linear equation, solveLinEquation.
+      function solvLinEquation(a, b, c) {
+        var x = (c - b) / a;
+        return x;
+      }
+      console.log(solvLinEquation(2, 4, 6));
+      // b) Quadratic equation
+      // Quadratic equation is calculated as follows: ax2 + bx + c = 0. Write a function which
+      // calculates value or values of a quadratic equation, solveQuadEquation.
+      function solvQuadEquation(a, b, c) {
+        let divided = Math.pow(b, 2) - 4 * a * c;
+        if (divided < 0) {
+          return "No solution";
+        } else {
+          var result = (-1 * b + Math.sqrt(divided)) / (2 * a);
+          var result2 = (-1 * b - Math.sqrt(divided)) / (2 * a);
+          return result + "or" + result2;
+        }
+      }
+      console.log(solvQuadEquation(2, -5, 2));
+
+      // 3. How to check if a value is empty or not, undefined or null, zero length string, empty array, empty object
+      function isEmpty(data) {
+        // checks booleans and numbers
+        if (typeof data == "number" || typeof data == "boolean") {
+          return false;
+        }
+        // cheks declared but undefined variables
+        if (typeof data == "undefined" || data === null) {
+          return true;
+        }
+        // checks if strings or arrays are empty (value is "", or [])
+        if (typeof data.length != "undefined") {
+          // if length is more than zero, the string or array has  items and  function returns false
+          return data.length == 0;
+        }
+        // checks objects
+        var count = 0;
+        for (var i in data) {
+          if (data.hasOwnProperty(i)) {
+            count++;
+          }
+          // if object does not have any keys, count is zero and returns true
+          return count == 0;
+        }
+      }
+      // 4. Learn how to deal with arrays
+      // 5. Learn how to modify an object, understanding  the bonus part of the test4 could help a lot
+      // 6. Learn to check if a number is even, odd or prime
+      // a) Make a function that finds prime numbers from a range. A prime number (or a prime) is a natural number
+      // greater than 1 that has no positive divisors other than 1 and itself.
+
+      function findPrimeNumbers(a, b) {
+        let arr = [];
+        function isPrime(value) {
+          for (var i = 2; i < value; i++) {
+            if (value % i === 0) {
+              return false;
+            }
+          }
+          return value > 1;
+        }
+        for (let i = a; i <= b; i++) {
+          if (isPrime(i)) {
+            console.log(i);
+            arr.push(i);
+          }
+        }
+        return arr;
+      }
+      // check if number is even or odd
+      function evenOrOdd(num) {
+        if (num % 2 === 0) {
+          return "even";
+        } else {
+          return "odd";
+        }
+      }
+      console.log(findPrimeNumbers(0, 25));
+      console.log("moi");
+      // 7. Check if a number or a word is a palindrome or not
+      function isPalindrome(numberOrWord) {
+        let copy = numberOrWord;
+        let reversed = "";
+
+        for (let i = numberOrWord.length - 1; i >= 0; i--) {
+          reversed += copy[i].toString().toLowerCase();
+        }
+        return reversed.toLowerCase() === numberOrWord.toLowerCase();
+      }
+      console.log(isPalindrome("101"));
+      console.log(isPalindrome("bob"));
+      console.log(isPalindrome("Bob"));
+      console.log(isPalindrome("14231"));
+    </script>
+  </body>
+</html>

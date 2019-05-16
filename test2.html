@@ -140,30 +140,11 @@
         return strOne.slice(-num) === strTwo;
       }
       console.log(isEndingTrue("integrity", "ity"));
-
-      // Make a function that finds prime numbers from a range. A prime number (or a prime) is a natural number
-      // greater than 1 that has no positive divisors other than 1 and itself.
-      console.log("13.5.");
-      function findPrimeNumbers(a, b) {
-        let arr = [];
-        function isPrime(value) {
-          for (var i = 2; i < value; i++) {
-            if (value % i === 0) {
-              return false;
-            }
-          }
-          return value > 1;
-        }
-        for (let i = a; i <= b; i++) {
-          if (isPrime(i)) {
-            console.log(i);
-            arr.push(i);
-          }
-        }
-        return arr;
+      // OR
+      function isEndingSame(strOne, strTwo) {
+        return strOne.endsWith(strTwo);
       }
-      console.log(findPrimeNumbers(7, 25));
-      console.log("moi");
+      console.log(isEndingSame("integrity", "ity"));
     </script>
   </body>
 </html>
